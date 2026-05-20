@@ -52,7 +52,7 @@ new class extends Component
     </div>
 
     @if($this->showForm)
-        <div class="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-700">
+        <div class="mb-6 p-4 border border-gray-200 rounded-lg">
             <h2 class="text-lg font-medium mb-4">Create a new list</h2>
             <input wire:model="name"
                    type="text"

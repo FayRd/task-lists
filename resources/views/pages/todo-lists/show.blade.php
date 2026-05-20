@@ -78,7 +78,7 @@ new class extends Component
     <div class="space-y-2">
         @forelse($this->items as $item)
             <div class="flex items-center gap-3 p-3 border border-gray-200 rounded-lg
-                        {{ $item->is_completed ? 'bg-gray-50 opacity-60' : 'bg-gray-700' }}">
+                        {{ $item->is_completed ? 'opacity-60' : 'opacity-100' }}">
                 <input type="checkbox"
                        wire:click="toggleItem({{ $item->id }})"
                        @checked($item->is_completed)
