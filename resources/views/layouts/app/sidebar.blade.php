@@ -15,6 +15,10 @@
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="list-bullet" :href="route('lists.index')" :current="request()->routeIs('lists.index')" wire:navigate>
+                        {{ __('My Lists') }}
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 

@@ -13,6 +13,8 @@ Route::get('/auth/google/callback', [GoogleController::class, 'callback'])
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
+    Route::livewire('/lists', 'pages::todo-lists.index')->name('lists.index');
+    Route::livewire('/lists/{todoList}', 'pages::todo-lists.show')->name('lists.show');
 });
 
 
