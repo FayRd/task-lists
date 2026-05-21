@@ -58,6 +58,31 @@ new class extends Component
         @if($this->todoList->description)
             <p class="text-gray-500 text-sm mt-1">{{ $this->todoList->description }}</p>
         @endif
+        <div class="mt-4 flex items-center gap-4">
+            @if($this->todoList->listShare && $this->todoList->listShare->expires_at->isFuture())
+                <div class="flex items-center gap-2 text-sm">
+                    <input type="text"
+                        readonly
+                        value="{{ route('share.preview', $this->todoList->listShare->token) }}"
+                        class="border border-gray-200 rounded px-3 py-1.5 text-xs text-gray-600 w-72 bg-gray-50" />
+                    <form method="POST" action="{{ route('lists.share', $this->todoList) }}">
+                        @csrf
+                        <button type="submit"
+                                class="text-xs text-indigo-600 hover:underline">
+                            Regenerate
+                        </button>
+                    </form>
+                </div>
+            @else
+                <form method="POST" action="{{ route('lists.share', $this->todoList) }}">
+                    @csrf
+                    <button type="submit"
+                            class="px-4 py-2 bg-indigo-100 text-indigo-700 rounded-lg text-sm hover:bg-indigo-200">
+                        Share as preset
+                    </button>
+                </form>
+            @endif
+        </div>
     </div>
 
     <div class="flex gap-2 mb-6">
