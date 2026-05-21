@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class TodoList extends Model
 {
     protected $fillable = ['user_id', 'name', 'description', 'is_preset'];
-
+    protected $with = ['todoItems'];
+    
     protected $casts = [
         'is_preset' => 'boolean',
     ];

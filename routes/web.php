@@ -21,16 +21,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::livewire('/lists/{todoList}', 'pages::todo-lists.show')
         ->name('lists.show');
     Route::post('/lists/{todoList}/share', [ListShareController::class, 'generate'])
-        ->name('lists.share');
+        ->name('lists.share')
+        ->middleware('throttle:share-generate');
     Route::get('/share/{token}/claim', [ListShareController::class, 'claim'])
-        ->name('share.claim');
+        ->name('share.claim')
+        ->middleware('throttle:share-import');
+    Route::post('share/{token}/import', [ListShareController::class, 'import'])
+        ->name('share.import')
+        ->middleware('throttle:share-import');
 });
 
 // Shared Link Routes
 Route::get('/share/{token}', [ListShareController::class, 'preview'])
     ->name('share.preview');
-Route::post('share/{token}/import', [ListShareController::class, 'import'])
-    ->name('share.import')
-    ->middleware(['auth', 'verified']);
+
 
 require __DIR__.'/settings.php';

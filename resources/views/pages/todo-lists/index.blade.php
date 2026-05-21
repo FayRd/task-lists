@@ -45,37 +45,34 @@ new class extends Component
 <div class="max-w-3xl mx-auto py-8 px-4">
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-2xl font-semibold">My Lists</h1>
-        <button wire:click="$set('showForm', true)"
-                class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm hover:bg-indigo-700">
+        <x-primary-button wire:click="$set('showForm', true)">
             Create List
-        </button>
+        </x-primary-button>
     </div>
 
     @if($this->showForm)
-        <div class="mb-6 p-4 border border-gray-200 rounded-lg">
-            <h2 class="text-lg font-medium mb-4">Create a new list</h2>
-            <input wire:model="name"
-                   type="text"
-                   placeholder="List name"
-                   class="w-full border border-gray-300 rounded-md px-3 py-2 mb-3 text-sm" />
-            <textarea wire:model="description"
-                      placeholder="Description (optional)"
-                      class="w-full border border-gray-300 rounded-md px-3 py-2 mb-3 text-sm"
-                      rows="2"></textarea>
-            @error('name')
-                <p class="text-red-500 text-xs mb-2">{{ $message }}</p>
-            @enderror
-            <div class="flex gap-2">
-                <button wire:click="create"
-                        class="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700">
-                    Create
-                </button>
-                <button wire:click="$set('showForm', false)"
-                        class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md text-sm hover:bg-gray-300">
+        <x-form-card title="Create a new list">
+            <x-text-input wire:model="name" placeholder="List name" class="mb-3" />
+                <input wire:model="name"
+                    type="text"
+                    placeholder="List name"
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 mb-3 text-sm" />
+                <textarea wire:model="description"
+                        placeholder="Description (optional)"
+                        class="w-full border border-gray-300 rounded-md px-3 py-2 mb-3 text-sm"
+                        rows="2"></textarea>
+                @error('name')
+                    <p class="text-red-500 text-xs mb-2">{{ $message }}</p>
+                @enderror
+                <div class="flex gap-2">
+                    <x-primary-button wire:click="create">
+                        Create
+                    </x-primary-button>
+                <x-primary-button variant="secondary" wire:click="$set('showForm', false)">
                     Cancel
-                </button>
-            </div>
-        </div>
+                </x-primary-button>
+                </div>
+        </x-form-card>
     @endif
 
     <div class="space-y-3">
